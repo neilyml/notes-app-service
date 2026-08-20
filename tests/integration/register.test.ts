@@ -38,13 +38,13 @@ describe('POST /api/v1/auth/register', () => {
     expect(matches).toBe(true);
   });
 
-  it('returns 500 for invalid input', async () => {
+  it('returns 400 for invalid input', async () => {
     const response = await request(app).post('/api/v1/auth/register').send({
       email: 'invalid-email',
       password: '123',
     });
 
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
   });
 
   it('returns 500 when email already exists', async () => {

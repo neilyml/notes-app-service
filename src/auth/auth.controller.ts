@@ -2,7 +2,6 @@ import type { Request, Response } from 'express';
 
 import { registerSchema, loginSchema } from './auth.validation';
 import { registerUser, loginUser } from './auth.service';
-import { ApiError } from '../shared/api-error';
 
 export async function register(req: Request, res: Response): Promise<void> {
   const input = registerSchema.parse(req.body);
@@ -18,13 +17,9 @@ export async function register(req: Request, res: Response): Promise<void> {
 }
 
 export async function login(req: Request, res: Response): Promise<void> {
-  const parsed = loginSchema.safeParse(req.body);
+  const input = loginSchema.parse(req.body);
 
-  if (!parsed.success) {
-    throw new ApiError(400, 'Invalid request body');
-  }
-
-  const accessToken = await loginUser(parsed.data);
+  const accessToken = await loginUser(input);
 
   res.status(200).json({ accessToken });
 }
