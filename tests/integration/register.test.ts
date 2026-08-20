@@ -37,4 +37,28 @@ describe('POST /api/v1/auth/register', () => {
 
     expect(matches).toBe(true);
   });
+
+  it('returns 500 for invalid input', async () => {
+    const response = await request(app).post('/api/v1/auth/register').send({
+      email: 'invalid-email',
+      password: '123',
+    });
+
+    expect(response.status).toBe(500);
+  });
+
+  it('returns 500 when email already exists', async () => {
+    const payload = {
+      email: 'user@example.com',
+      password: 'password123',
+    };
+
+    await request(app).post('/api/v1/auth/register').send(payload);
+
+    const response = await request(app)
+      .post('/api/v1/auth/register')
+      .send(payload);
+
+    expect(response.status).toBe(500);
+  });
 });

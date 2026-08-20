@@ -2,6 +2,7 @@ import express from 'express';
 import { customPinoHttpLogger } from './middlewares/request-logger';
 
 import authRoutes from './auth/auth.routes';
+import { errorHandler } from './middlewares/error-handler';
 
 const app = express();
 
@@ -16,5 +17,7 @@ app.get('/api/v1/health', (_req, res) => {
 
   res.status(200).json({ ok: true });
 });
+
+app.use(errorHandler);
 
 export default app;
