@@ -6,6 +6,7 @@ const schema = z.object({
   PORT: z.coerce.number().default(8080),
   LOG_LEVEL: z.enum(['error', 'warn', 'info', 'debug', 'trace']).default('info'),
   MONGODB_URI: z.url(),
+  JWT_SECRET: z.string().min(1),
 });
 
 const parsed = schema.safeParse(process.env);

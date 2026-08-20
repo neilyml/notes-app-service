@@ -7,5 +7,8 @@ export default defineConfig({
     globalSetup: ['./tests/setup/mongo-init.ts'],
     setupFiles: ['./tests/setup/db.ts'],
     fileParallelism: false,
+    env: {
+      JWT_SECRET: 'test-secret',
+    },
   },
 });
