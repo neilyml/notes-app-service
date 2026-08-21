@@ -21,7 +21,7 @@ const postSchema = new Schema(
   },
 );
 
-postSchema.index({ userId: 1, createdAt: -1 });
-postSchema.index({ createdAt: -1 });
+postSchema.index({ userId: 1, createdAt: -1, _id: -1 });
+postSchema.index({ createdAt: -1, _id: -1 });
 
 export const Post = model('Post', postSchema);
