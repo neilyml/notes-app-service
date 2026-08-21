@@ -6,6 +6,7 @@ import adminInterestGroupsRoutes from './feat-admin-interest-groups/admin-intere
 import adminNotesRoutes from './feat-admin-notes/admin-notes.routes';
 import adminUsersRoutes from './feat-admin-users/admin-users.routes';
 import notesRoutes from './feat-notes/notes.routes';
+import postsRoutes from './feat-posts/posts.routes';
 import usersRoutes from './feat-users/users.routes';
 import { errorHandler } from './middlewares/error-handler';
 
@@ -19,6 +20,7 @@ app.use('/api/v1/admin/user-interest-groups', adminInterestGroupsRoutes);
 app.use('/api/v1/admin/notes', adminNotesRoutes);
 app.use('/api/v1/admin/users', adminUsersRoutes);
 app.use('/api/v1/notes', notesRoutes);
+app.use('/api/v1/posts', postsRoutes);
 app.use('/api/v1/users', usersRoutes);
 
 app.get('/api/v1/health', (_req, res) => {
