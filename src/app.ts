@@ -1,4 +1,7 @@
+import cors from 'cors';
 import express from 'express';
+
+import { environment } from './configs/environment';
 import { customPinoHttpLogger } from './middlewares/request-logger';
 
 import adminInterestGroupsRoutes from './core/admin-interest-groups/admin-interest-groups.routes';
@@ -13,6 +16,7 @@ import { errorHandler } from './middlewares/error-handler';
 
 const app = express();
 
+app.use(cors({ origin: [environment.CORS_ORIGIN] }));
 app.use(express.json());
 app.use(customPinoHttpLogger);
 
