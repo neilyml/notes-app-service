@@ -1,5 +1,5 @@
 import { Note } from './note.model';
-import type { CreateNoteInput, PaginationInput } from './notes.validation';
+import type { CreateNoteInput, PaginationInput, UpdateNoteInput } from './notes.validation';
 
 export async function saveNote(userId: string, input: CreateNoteInput) {
   return Note.create({
@@ -21,4 +21,29 @@ export async function findNotesByUser(userId: string, pagination: PaginationInpu
     notes,
     total,
   };
+}
+
+export async function findNoteByUser(noteId: string, userId: string) {
+  return Note.findOne({
+    _id: noteId,
+    userId,
+  });
+}
+
+export async function updateNoteByUser(noteId: string, userId: string, input: UpdateNoteInput) {
+  return Note.findOneAndUpdate(
+    {
+      _id: noteId,
+      userId,
+    },
+    { $set: input },
+    { returnDocument: 'after' },
+  );
+}
+
+export async function deleteNoteByUser(noteId: string, userId: string) {
+  return Note.findOneAndDelete({
+    _id: noteId,
+    userId,
+  });
 }
