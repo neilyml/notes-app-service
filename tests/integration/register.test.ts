@@ -3,7 +3,7 @@ import request from 'supertest';
 import { describe, it, expect } from 'vitest';
 
 import app from '../../src/app';
-import { User } from '../../src/users/user.model';
+import { User } from '../../src/core/users/user.model';
 
 describe('POST /api/v1/auth/register', () => {
   it('registers a new user and hashes the password', async () => {

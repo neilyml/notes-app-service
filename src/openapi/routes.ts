@@ -2,22 +2,22 @@ import type { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import type { ZodType } from 'zod';
 import { z } from 'zod';
 
-import { loginSchema, registerSchema } from '../auth/auth.validation';
-import { adminNotesPaginationSchema } from '../feat-admin-notes/admin-notes.validation';
+import { adminNotesPaginationSchema } from '../core/admin-notes/admin-notes.validation';
 import {
   adminUsersPaginationSchema,
   createAdminUserSchema,
   updateAdminUserSchema,
   userIdSchema,
-} from '../feat-admin-users/admin-users.validation';
+} from '../core/admin-users/admin-users.validation';
+import { loginSchema, registerSchema } from '../core/auth/auth.validation';
 import {
   createNoteSchema,
   noteIdSchema,
   paginationSchema,
   updateNoteSchema,
-} from '../feat-notes/notes.validation';
-import { createPostSchema, postsPaginationSchema } from '../feat-posts/posts.validation';
-import { userPostsUserIdSchema } from '../feat-user-posts/user-posts.validation';
+} from '../core/notes/notes.validation';
+import { createPostSchema, postsPaginationSchema } from '../core/posts/posts.validation';
+import { userPostsUserIdSchema } from '../core/user-posts/user-posts.validation';
 import {
   errorResponseSchema,
   healthResponseSchema,

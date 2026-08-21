@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 
 import { ApiError } from '../shared/api-error';
-import type { UserRole } from '../users/user.model';
+import type { UserRole } from '../core/users/user.model';
 
 export function authorize(requiredRole: UserRole): RequestHandler {
   return (req, _res, next) => {

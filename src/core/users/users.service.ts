@@ -1,5 +1,5 @@
-import { ApiError } from '../shared/api-error';
-import { User } from '../users/user.model';
+import { ApiError } from '../../shared/api-error';
+import { User } from './user.model';
 
 export async function getCurrentUser(userId: string) {
   const user = await User.findById(userId).select('email role interests');

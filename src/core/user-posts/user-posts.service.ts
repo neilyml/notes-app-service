@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 
-import { Post } from '../feat-posts/post.model';
+import { Post } from '../posts/post.model';
 import { User } from '../users/user.model';
 
 export async function findUserWithPosts(userId: string) {

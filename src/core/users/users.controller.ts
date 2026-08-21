@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 
-import { ApiError } from '../shared/api-error';
+import { ApiError } from '../../shared/api-error';
 import { getCurrentUser } from './users.service';
 
 export async function getMe(req: Request, res: Response): Promise<void> {

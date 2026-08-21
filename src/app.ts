@@ -1,14 +1,14 @@
 import express from 'express';
 import { customPinoHttpLogger } from './middlewares/request-logger';
 
-import authRoutes from './auth/auth.routes';
-import adminInterestGroupsRoutes from './feat-admin-interest-groups/admin-interest-groups.routes';
-import adminNotesRoutes from './feat-admin-notes/admin-notes.routes';
-import adminUsersRoutes from './feat-admin-users/admin-users.routes';
-import notesRoutes from './feat-notes/notes.routes';
-import postsRoutes from './feat-posts/posts.routes';
-import userPostsRoutes from './feat-user-posts/user-posts.routes';
-import usersRoutes from './feat-users/users.routes';
+import adminInterestGroupsRoutes from './core/admin-interest-groups/admin-interest-groups.routes';
+import adminNotesRoutes from './core/admin-notes/admin-notes.routes';
+import adminUsersRoutes from './core/admin-users/admin-users.routes';
+import authRoutes from './core/auth/auth.routes';
+import notesRoutes from './core/notes/notes.routes';
+import postsRoutes from './core/posts/posts.routes';
+import userPostsRoutes from './core/user-posts/user-posts.routes';
+import usersRoutes from './core/users/users.routes';
 import { errorHandler } from './middlewares/error-handler';
 
 const app = express();

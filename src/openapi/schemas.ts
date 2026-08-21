@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { USER_ROLES } from '../users/user.model';
+import { USER_ROLES } from '../core/users/user.model';
 
 const timestampSchema = z.iso.datetime();
 

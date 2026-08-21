@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 import { mongo } from 'mongoose';
 
-import { ApiError } from '../shared/api-error';
 import { User } from '../users/user.model';
+import { ApiError } from '../../shared/api-error';
 import type {
   AdminUsersPagination,
   CreateAdminUserInput,
