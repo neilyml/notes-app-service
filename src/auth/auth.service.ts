@@ -1,9 +1,19 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import { User } from '../users/user.model';
-import type { RegisterInput } from './auth.validation';
+import { ApiError } from '../shared/api-error';
+import { environment } from '../configs/environment';
+import type { RegisterInput, LoginInput } from './auth.validation';
 
 const SALT_ROUNDS = 12;
+const TOKEN_EXPIRES_IN = '1h';
+const INVALID_CREDENTIALS = 'Invalid email or password';
+
+// Unknown emails are compared against a throwaway hash so that path costs the
+// same as verifying a real password. Without it, the faster 401 would tell an
+// attacker which addresses are registered.
+const DUMMY_PASSWORD_HASH = bcrypt.hashSync('dummy-password', SALT_ROUNDS);
 
 export async function registerUser(input: RegisterInput) {
   const passwordHash = await bcrypt.hash(input.password, SALT_ROUNDS);
@@ -13,5 +23,20 @@ export async function registerUser(input: RegisterInput) {
     passwordHash,
     interests: input.interests,
     role: 'USER',
+  });
+}
+
+export async function loginUser(input: LoginInput): Promise<string> {
+  const user = await User.findOne({ email: input.email }).select('+passwordHash');
+
+  const matches = await bcrypt.compare(input.password, user?.passwordHash ?? DUMMY_PASSWORD_HASH);
+
+  if (!user || !matches) {
+    throw new ApiError(401, INVALID_CREDENTIALS);
+  }
+
+  return jwt.sign({ role: user.role }, environment.JWT_SECRET, {
+    subject: user._id.toString(),
+    expiresIn: TOKEN_EXPIRES_IN,
   });
 }
