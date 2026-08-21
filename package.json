@@ -10,6 +10,7 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
+    "openapi:generate": "tsx src/openapi/generate.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
@@ -33,6 +34,7 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
+    "@asteasolutions/zod-to-openapi": "9.1.0",
     "@types/bcrypt": "6.0.0",
     "@types/express": "5.0.6",
     "@types/jsonwebtoken": "9.0.10",
