@@ -10,6 +10,11 @@ const SALT_ROUNDS = 12;
 const TOKEN_EXPIRES_IN = '1h';
 const INVALID_CREDENTIALS = 'Invalid email or password';
 
+// Unknown emails are compared against a throwaway hash so that path costs the
+// same as verifying a real password. Without it, the faster 401 would tell an
+// attacker which addresses are registered.
+const DUMMY_PASSWORD_HASH = bcrypt.hashSync('dummy-password', SALT_ROUNDS);
+
 export async function registerUser(input: RegisterInput) {
   const passwordHash = await bcrypt.hash(input.password, SALT_ROUNDS);
 
@@ -24,13 +29,9 @@ export async function registerUser(input: RegisterInput) {
 export async function loginUser(input: LoginInput): Promise<string> {
   const user = await User.findOne({ email: input.email }).select('+passwordHash');
 
-  if (!user) {
-    throw new ApiError(401, INVALID_CREDENTIALS);
-  }
+  const matches = await bcrypt.compare(input.password, user?.passwordHash ?? DUMMY_PASSWORD_HASH);
 
-  const matches = await bcrypt.compare(input.password, user.passwordHash);
-
-  if (!matches) {
+  if (!user || !matches) {
     throw new ApiError(401, INVALID_CREDENTIALS);
   }
 

@@ -1,6 +1,7 @@
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import request from 'supertest';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 import app from '../../src/app';
 
@@ -75,6 +76,19 @@ describe('POST /api/v1/auth/login', () => {
 
     expect(wrongPassword.status).toBe(unknownEmail.status);
     expect(wrongPassword.body.message).toBe(unknownEmail.body.message);
+  });
+
+  it('still verifies a password when the email is unknown', async () => {
+    const compare = vi.spyOn(bcrypt, 'compare');
+
+    await request(app).post('/api/v1/auth/login').send({
+      email: 'unknown@example.com',
+      password: credentials.password,
+    });
+
+    expect(compare).toHaveBeenCalledTimes(1);
+
+    compare.mockRestore();
   });
 
   it('returns 400 for an invalid request body', async () => {
