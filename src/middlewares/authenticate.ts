@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { environment } from '../configs/environment';
 import { ApiError } from '../shared/api-error';
-import { USER_ROLES, type UserRole } from '../users/user.model';
+import { USER_ROLES, type UserRole } from '../core/users/user.model';
 
 function unauthorized(): ApiError {
   return new ApiError(401, 'Unauthorized');

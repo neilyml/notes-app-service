@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 
-import { ApiError } from '../shared/api-error';
+import { ApiError } from '../../shared/api-error';
 import { findUserWithPosts } from './user-posts.service';
 import { userPostsUserIdSchema } from './user-posts.validation';
 

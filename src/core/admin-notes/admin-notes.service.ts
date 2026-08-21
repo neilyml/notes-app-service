@@ -1,4 +1,4 @@
-import { Note } from '../feat-notes/note.model';
+import { Note } from '../notes/note.model';
 import type { AdminNotesPagination } from './admin-notes.validation';
 
 export async function findAllNotes(pagination: AdminNotesPagination) {

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { authenticate } from '../middlewares/authenticate';
-import { authorize } from '../middlewares/authorize';
+import { authenticate } from '../../middlewares/authenticate';
+import { authorize } from '../../middlewares/authorize';
 import { listUserInterestGroups } from './admin-interest-groups.controller';
 
 const router = Router();

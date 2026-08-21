@@ -2,8 +2,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import { User } from '../users/user.model';
-import { ApiError } from '../shared/api-error';
-import { environment } from '../configs/environment';
+import { environment } from '../../configs/environment';
+import { ApiError } from '../../shared/api-error';
 import type { RegisterInput, LoginInput } from './auth.validation';
 
 const SALT_ROUNDS = 12;
