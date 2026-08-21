@@ -13,7 +13,7 @@ export async function findNotesByUser(userId: string, pagination: PaginationInpu
   const skip = (pagination.page - 1) * pagination.limit;
 
   const [notes, total] = await Promise.all([
-    Note.find({ userId }).sort({ createdAt: -1 }).skip(skip).limit(pagination.limit),
+    Note.find({ userId }).sort({ createdAt: -1, _id: -1 }).skip(skip).limit(pagination.limit),
     Note.countDocuments({ userId }),
   ]);
 

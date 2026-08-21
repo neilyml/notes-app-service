@@ -23,7 +23,7 @@ export async function findUserWithPosts(userId: string) {
             },
           },
           {
-            $sort: { createdAt: -1 },
+            $sort: { createdAt: -1, _id: -1 },
           },
           {
             $project: {
