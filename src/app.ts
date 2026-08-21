@@ -2,6 +2,7 @@ import express from 'express';
 import { customPinoHttpLogger } from './middlewares/request-logger';
 
 import authRoutes from './auth/auth.routes';
+import adminInterestGroupsRoutes from './feat-admin-interest-groups/admin-interest-groups.routes';
 import adminNotesRoutes from './feat-admin-notes/admin-notes.routes';
 import adminUsersRoutes from './feat-admin-users/admin-users.routes';
 import notesRoutes from './feat-notes/notes.routes';
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(customPinoHttpLogger);
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/admin/user-interest-groups', adminInterestGroupsRoutes);
 app.use('/api/v1/admin/notes', adminNotesRoutes);
 app.use('/api/v1/admin/users', adminUsersRoutes);
 app.use('/api/v1/notes', notesRoutes);
